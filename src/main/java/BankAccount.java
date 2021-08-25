@@ -11,13 +11,13 @@ public class BankAccount {
     }
 
     public void deposit(int amount, LocalDate date) {
-        BankTransaction transaction = new BankTransaction(amount, date, previousBalance + amount);
+        BankTransaction transaction = BankTransaction.Builder.amount(amount).date(date).balance(previousBalance + amount).build();
         this.previousBalance = previousBalance + amount;
         transactions.add(transaction);
     }
 
     public void withdraw(int amount, LocalDate date) {
-        BankTransaction transaction = new BankTransaction(-amount, date, previousBalance - amount);
+        BankTransaction transaction = BankTransaction.Builder.amount(-amount).date(date).balance(previousBalance - amount).build();
         this.previousBalance = previousBalance - amount;
         transactions.add(transaction);
     }
