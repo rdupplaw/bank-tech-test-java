@@ -17,6 +17,10 @@ public class BankAccount {
     }
 
     public void withdraw(int amount, LocalDate date) {
+        if (previousBalance - amount < 0) {
+            throw new ArithmeticException("Cannot withdraw below zero");
+        }
+
         BankTransaction transaction = BankTransaction.Builder.amount(-amount).date(date).balance(previousBalance - amount).build();
         this.previousBalance = previousBalance - amount;
         transactions.add(transaction);
